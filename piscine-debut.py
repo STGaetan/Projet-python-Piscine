@@ -8,6 +8,7 @@ param = {'bdd': [(1,3,10),(2,1,13),(3,2,6), (3,1,8) ],
          'nageurs': [(1, "Pierre"), (2, "Paul"), (3, "Léa")]
         }
 
+
 def reset(param):
     '''réinitialise la bdd'''
     param.clear()
@@ -50,8 +51,8 @@ def cmd_ajout(param):
 
 def cmd_liste(param):
     """Affiche tous les performances des nageurs"""
-    print("Prénom       |   nage    |   longueur")
-    print("-------------------------------------")
+    print("Prénom       |   Nage    |   Longueur")
+    print("-----------------------------------")
     for elt in param['bdd']:
         nageur = get_str_from_num_in_list(elt[0], param['nageurs'])
         nage = get_str_from_num_in_list(elt[1], param['nages'])
@@ -150,41 +151,42 @@ isAlive = True
 if os.path.exists('save.backup'):
     cmd_load(param, 'save.backup')
 while isAlive:
+    print("Veuillez entrez le chiffre correspondant:\n1 -> Ajout d'une performance\n2 -> Ajout d'un individu\n3 -> Ajout d'une nouvelle nage\n4 -> Liste toutes les performances\n5 -> Liste les performances d'un nageur\n6 -> Liste tous les nageurs pratiquants une nage\n7 -> Sauvegarde les données utilisateurs\n8 -> Charge les données utilisateurs\n0 -> Quitte le logiciel")    
     commande = get_cmd()
 
-    if commande == 'ajout':
+    if commande == '1':
         cmd_ajout(param)
         continue
 
-    if commande == 'individu':
+    if commande == '2':
         cmd_individu(param)
         continue
     
-    if commande == 'nouvelle nage':
+    if commande == '3':
         cmd_nouvellenage(param)
         continue
 
-    if commande == 'liste':
+    if commande == '4':
         cmd_liste(param)
         continue
 
-    if commande == 'nageur':
+    if commande == '5':
         cmd_nageur(param)
         continue
 
-    if commande == "nage":
+    if commande == "6":
         cmd_nage(param)
         continue
 
-    if commande == "save":
+    if commande == "7":
         cmd_save(param)
         continue
 
-    if commande == "load":
+    if commande == "8":
         cmd_load(param)
         continue
 
-    if commande == "exit":
+    if commande == "0":
         isAlive = cmd_exit(param)
         continue
 
