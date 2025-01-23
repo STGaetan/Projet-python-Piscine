@@ -3,10 +3,24 @@ import os
 commande = ''
 
 #default values
-param = {'bdd': [(1,3,10),(2,1,13),(3,2,6), (3,1,8) ],
-         'nages': [(1, "Brasse"), (2, "Dos"), (3, "Crawl")],
-         'nageurs': [(1, "Pierre"), (2, "Paul"), (3, "Léa")]
-        }
+param = {
+    'bdd': [
+        (1, 3, 10, '2025-01-01'),
+        (2, 1, 13, '2025-02-15'),
+        (3, 2, 6, '2025-03-10'),
+        (3, 1, 8, '2025-04-05')
+    ],
+    'nages': [
+        (1, "Brasse"),
+        (2, "Dos"),
+        (3, "Crawl")
+    ],
+    'nageurs': [
+        (1, "Pierre"),
+        (2, "Paul"),
+        (3, "Léa")
+    ]
+}
 
 
 def reset(param):
@@ -46,18 +60,18 @@ def cmd_ajout(param):
     for elt in param['nages']:
         print(f"{elt[0]:5} : {elt[1]}")
     b = int(input("Nage n° ? "))
-    c = int(input("combien de longueur ? "))
-    param['bdd'].append((a,b,c))
+    c = int(input("Combien de longueur ? "))
+    d = input("Date de la performance (yyyy-mm-dd) ? ")
+    param['bdd'].append((a, b, c, d))
 
 def cmd_liste(param):
     """Affiche tous les performances des nageurs"""
-    print("Prénom       |   Nage    |   Longueur")
-    print("-----------------------------------")
+    print("Prénom       |   Nage    |   Longueur   |   Date")
+    print("-----------------------------------------------")
     for elt in param['bdd']:
         nageur = get_str_from_num_in_list(elt[0], param['nageurs'])
         nage = get_str_from_num_in_list(elt[1], param['nages'])
-        print(f" {nageur:11}| {nage:8}|  {elt[2]}")
-
+        print(f" {nageur:12}| {nage:10}| {elt[2]:10} | {elt[3]}")
 
 def cmd_nageur(param):
     """Affiche tableau d'un nageur"""
@@ -65,13 +79,13 @@ def cmd_nageur(param):
         print(f"{elt[0]:5} : {elt[1]}")
     tmp = int(input("Quel numéro de nageur ? "))
     print("Performances de ", tmp)
-    print("   nage    |   longueur")
-    print("-----------------------")
+    print("   Nage       |   Longueur   |   Date")
+    print("-------------------------------------")
     for elt in param['bdd']:
         if elt[0] == tmp:
             nage = get_str_from_num_in_list(elt[1], param['nages'])
-            print(f" {elt[1]:10}|   {elt[2]}")
-
+            print(f" {nage:10} | {elt[2]:10} | {elt[3]}")
+            
 def cmd_nage(param):
     """Affiche tableau des nages"""
     for elt in param['nages']:
