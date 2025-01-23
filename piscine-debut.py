@@ -156,7 +156,15 @@ def cmd_exit(param):
         return False
     else:
         return True
-
+    
+def get_int_value():
+    while True:
+        try:
+            msg = int(input("Veuillez entrez le chiffre correspondant:\n1 -> Ajout d'une performance\n2 -> Ajout d'un individu\n3 -> Ajout d'une nouvelle nage\n4 -> Liste toutes les performances\n5 -> Liste les performances d'un nageur\n6 -> Liste tous les nageurs pratiquants une nage\n7 -> Sauvegarde les données utilisateurs\n8 -> Charge les données utilisateurs\n0 -> Quitte le logiciel\n"))
+            return msg
+        except:
+            print("Indiquez bien une valeur numérique !")
+            
 #
 #   Programme principal
 #
@@ -165,7 +173,8 @@ isAlive = True
 if os.path.exists('save.backup'):
     cmd_load(param, 'save.backup')
 while isAlive:
-    print("Veuillez entrez le chiffre correspondant:\n1 -> Ajout d'une performance\n2 -> Ajout d'un individu\n3 -> Ajout d'une nouvelle nage\n4 -> Liste toutes les performances\n5 -> Liste les performances d'un nageur\n6 -> Liste tous les nageurs pratiquants une nage\n7 -> Sauvegarde les données utilisateurs\n8 -> Charge les données utilisateurs\n0 -> Quitte le logiciel")    
+    print(get_int_value())
+
     commande = get_cmd()
 
     if commande == '1':
