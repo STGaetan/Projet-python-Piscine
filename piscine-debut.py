@@ -77,14 +77,31 @@ def cmd_nageur(param):
     """Affiche tableau d'un nageur"""
     for elt in param['nageurs']:
         print(f"{elt[0]:5} : {elt[1]}")
-    tmp = int(input("Quel numéro de nageur ? "))
-    print("Performances de ", tmp)
-    print("   Nage       |   Longueur   |   Date")
-    print("-------------------------------------")
-    for elt in param['bdd']:
-        if elt[0] == tmp:
-            nage = get_str_from_num_in_list(elt[1], param['nages'])
-            print(f" {nage:10} | {elt[2]:10} | {elt[3]}")
+    nageur_id = int(input("Quel numéro de nageur ? "))
+    performances = [perf for perf in param['bdd'] if perf[0] == nageur_id]
+    
+    if not performances:
+        print(f"Aucune performance trouvée pour le nageur {nageur_id}")
+        return
+    
+    print(f"Performances de {nageur_id}")
+    print("nage | longueur")
+    print("--------------------")
+    
+    longueurs = []
+    for perf in performances:
+        nage = get_str_from_num_in_list(perf[1], param['nages'])
+        longueur = perf[2]
+        longueurs.append(longueur)
+        print(f"{nage} | {longueur}")
+    
+    min_perf = min(longueurs)
+    max_perf = max(longueurs)
+    avg_perf = sum(longueurs) / len(longueurs)
+    
+    print(f"Minimum : {min_perf}")
+    print(f"Maximum : {max_perf}")
+    print(f"Moyenne : {avg_perf:.1f}")
             
 def cmd_nage(param):
     """Affiche tableau des nages"""
