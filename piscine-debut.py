@@ -18,7 +18,7 @@ param = {
     'nageurs': [
         (1, "Pierre"),
         (2, "Paul"),
-        (3, "Léa")
+        (3, "Lea")
     ]
 }
 
@@ -143,12 +143,6 @@ def cmd_load(param, filename = 'save.csv'):
         param[key].append(tuple(tmp))
     fichier.close()
 
-def get_cmd():
-    '''Traitement de la commande d'entrée'''
-    msg = input("Que faut-il faire ? ")
-    msg = msg.lower()
-    return msg
-
 def cmd_exit(param):
     tmp = input("En êtes-vous sûr ? (o)ui/(n)on ")
     if tmp == 'o':
@@ -160,7 +154,7 @@ def cmd_exit(param):
 def get_int_value():
     while True:
         try:
-            msg = int(input("Veuillez entrez le chiffre correspondant:\n1 -> Ajout d'une performance\n2 -> Ajout d'un individu\n3 -> Ajout d'une nouvelle nage\n4 -> Liste toutes les performances\n5 -> Liste les performances d'un nageur\n6 -> Liste tous les nageurs pratiquants une nage\n7 -> Sauvegarde les données utilisateurs\n8 -> Charge les données utilisateurs\n0 -> Quitte le logiciel\n"))
+            msg = int(input("Veuillez entrez le chiffre correspondant:\n1 -> Ajout d'une performance\n2 -> Ajout d'un individu\n3 -> Ajout d'une nouvelle nage\n4 -> Liste toutes les performances\n5 -> Liste les performances d'un nageur\n6 -> Liste tous les nageurs pratiquants une nage\n7 -> Sauvegarde les données utilisateurs\n8 -> Charge les données utilisateurs\n0 -> Quitte le logiciel\nQue faut-il faire ? "))
             return msg
         except:
             print("Indiquez bien une valeur numérique !")
@@ -172,44 +166,44 @@ def get_int_value():
 isAlive = True
 if os.path.exists('save.backup'):
     cmd_load(param, 'save.backup')
+
 while isAlive:
-    print(get_int_value())
 
-    commande = get_cmd()
+    commande = get_int_value()
 
-    if commande == '1':
+    if commande == 1:
         cmd_ajout(param)
         continue
 
-    if commande == '2':
+    if commande == 2:
         cmd_individu(param)
         continue
     
-    if commande == '3':
+    if commande == 3:
         cmd_nouvellenage(param)
         continue
 
-    if commande == '4':
+    if commande == 4:
         cmd_liste(param)
         continue
 
-    if commande == '5':
+    if commande == 5:
         cmd_nageur(param)
         continue
 
-    if commande == "6":
+    if commande == 6:
         cmd_nage(param)
         continue
 
-    if commande == "7":
+    if commande == 7:
         cmd_save(param)
         continue
 
-    if commande == "8":
+    if commande == 8:
         cmd_load(param)
         continue
 
-    if commande == "0":
+    if commande == 0:
         isAlive = cmd_exit(param)
         continue
 
